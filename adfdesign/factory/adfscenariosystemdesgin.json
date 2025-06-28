@@ -1,0 +1,9 @@
+{
+	"name": "adfscenariosystemdesgin",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "dbcc8857-a18b-461e-a44a-6762caaeeb17",
+		"tenantId": "0cf0941a-9419-4614-9e75-236c4866102a"
+	}
+}
