@@ -1,0 +1,73 @@
+{
+	"name": "pipeline7",
+	"properties": {
+		"activities": [
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "GET",
+					"url": {
+						"value": "https://@{pipeline().parameters.keyvaluename}.vault.azure.net/secrets/@{pipeline().parameters.secret_info}?api-version=7.5",
+						"type": "Expression"
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Web1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "var_key",
+					"value": {
+						"value": "@activity('Web1').output.value",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"keyvaluename": {
+				"type": "string",
+				"defaultValue": "adfkeyvaultsaksham"
+			},
+			"secret_info": {
+				"type": "string",
+				"defaultValue": "sakshamsecret/73aa9b27cf5e427e91f578d0e034b799"
+			}
+		},
+		"variables": {
+			"var_key": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-06-13T04:29:47Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

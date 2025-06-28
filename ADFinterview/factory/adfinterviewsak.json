@@ -1,0 +1,9 @@
+{
+	"name": "adfinterviewsak",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a0791c1e-2dad-47bb-bd68-be3fff877290",
+		"tenantId": "0cf0941a-9419-4614-9e75-236c4866102a"
+	}
+}
